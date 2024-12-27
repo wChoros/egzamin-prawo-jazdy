@@ -14,6 +14,8 @@
 
 WAŻNE! - Z powodzeniem wykorzystałem ten skrypt do pozyskania terminu dużo wcześniej niż oficjalną metodą (27.12 zamiast 15.01 i to w dogodnej godzinie), ale z racji na zdanie egzaminu przy pierwszej próbie zaniechałem dalszej pracy nad udoskonalaniem mojej wersji programu, napewno znajdzie się w nim kilka błędów (jak chociażby losowe crashowanie po kilku dniach pracy ciągłej) zachęcam do dlaszej pracy nad kodem :). Skrpyt był testowany jedynie na Windows 11 postawionym na serwerze Proxmox - proces instalacji przebiega tak samo (build.bat)
 
+Program odświeża dane co 30s i jak tylko wykryje odpowiedni termin rezewuje go na stronie info-car - dzięki temu zanim aplikacje typu szybkie-prawko (odświeżanie co 5 min) powiadomią ludzi o zmianie terminu to my najprawdopodobniej już będziemy mieć zarezerwowany termin :D (oczywiście trzeba go w czasie opłacić ręcznie na stronie)- nie polecam zwiększania częstotliwości odświeżania gdyż może to skutkować błędami typu "Too many requests" ze strony api info-car.
+
 Aby zmniejszyć ilość powiadomień polecam z linijki 117 w pliku scripts\js\startSearching.js (firstCombined=...) usunąć "+firstPlaces" program wtedy będzie ignorował zmiany w ilości dostępnych miejsc o danej godzinie.
 
 
