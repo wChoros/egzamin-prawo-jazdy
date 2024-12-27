@@ -34,11 +34,11 @@ Po uruchomieniu aplikacji będzie ona szukała rezerwacji według twoich prefere
 
 Zmienne env, które muszą zostać wypełnione dla poprawnego działania aplikacji:
 
-KONTO "SŁUP" DO POZYSKIWANIA DANYCH O TERMINACH:
+Konto "słup" do pozyskiwania danych o terminach:
 - `EMAIL` - email drugiego konta infocar (do pozyskiwania danych o terminach - konto słup)
 - `PASSWORD` - hasło drugiego konta infocar (do pozyskiwania danych o terminach - konto słup)
 
-KONTO GŁÓWNE ORAZ DANE DO REZERWOWANIA TERMINÓW (UŻYWANE TYLKO WTEDY):
+Konto główne oraz dane do rezerwowania terminów (używane tylko wtedy):
 - `EMAIL_RESER` - email konta infocar (wykorzystywanego jedynie do rezerwacji terminu po jego znalezieniu)
 - `PASSWORD_RESERV` - hasło konta infocar (wykorzystywanego jedynie do rezerwacji terminu po jego znalezieniu)
 - `FIRST_NAME` - twoje pierwsze imie zapisane na stronie info-car
@@ -47,29 +47,29 @@ KONTO GŁÓWNE ORAZ DANE DO REZERWOWANIA TERMINÓW (UŻYWANE TYLKO WTEDY):
 - `PHONE_NUMBER` - twój numer telefonu przypisany do strony info-car
 - `PKK_NUMBER` - numer twojego profilu kandydata na kierowcę
   
-KATEGORIA EGZAMINU ORAZ ID WORD'U - ID znajdziesz pod https://info-car.pl/api/word/word-centers/:
+Kategoria egzaminu oraz id word'u - id znajdziesz pod https://info-car.pl/api/word/word-centers/:
 - `CATEGORY` - kategoria egzaminu który chcesz zarezerwować (Działanie aplikacji było sprawdzane jedynie na kategorii B)
 - `WORDID` - ID word w którym chcesz zdawać egzamin na kierowcę
 
-PRZEDZIAŁ DAT W KTÓRYM SZUKANY JEST NAJWCZEŚNIEJSZY TERMIN - ZACHOWAJ FORMAT ZGODNIE Z PRZYKŁADEM W PLIKU .env.example:
+Przedział dat w którym szukany jest najwcześniejszy termin - zachowaj format zgodnie z przykładem w pliku .env.example:
 - `DATE_FROM` - data wyznaczająca początkowy zakres szukania najwcześniejszego dostępnego terminu
 - `DATE_TO` - data wyznaczająca końcowy zakres szukania najwcześniejszego dostępnego terminu
   
-PRZEDZIAŁ DAT W KTÓRYCH MA ZOSTAĆ DOKONANA REZERWACJA - ZACHOWAJ FORMAT ZGODNIE Z PRZYKŁADEM:
+Przedział dat w których ma zostać dokonana rezerwacja - zachowaj format zgodnie z przykładem:
 - `RESERVATIONMODE` - Tryb pracy skryptu -> 0 - tylko wyszkiwanie najszybszych terminów, 1 - automatyczna rezerwacja terminu
 - `DATE_FROM_RESERVATION` - data wyznaczająca początkowy zakres szukania dogodnego terminu do rezerwacji
 - `DATE_TO_RESERVATION` - data wyznaczająca końcowy zakres szukania dogodnego terminu do rezerwacji
 
-PREFEROWANE GODZINY EGZAMINU - OD NAJISTOTNIEJSZYCH (Uwaga! godziny jednocyfrowe zapisuj z 0 - np. 09):
+Preferowane godziny egzaminu - od najistotniejszych (uwaga! godziny jednocyfrowe zapisuj z 0 - np. 09):
 - `PREFERRED_HOURS` - preferowane godziny egzaminu których aplikacja będzie szukać (od lewej do prawej)
 
-USTAWIENIA KANAŁÓW POWIADOMIEŃ:
+Ustawienia kanałów powiadomień:
 - `NOTIFYMACRODROID` - powiadomienia poprzez webhook macrodroid
 - `NOTIFYDISCORD` - powiadomienia poprzez webhook discord
 
-URL WEBHOOKA DISCORD - DO POWIADAMIANIA UŻYTKOWNIKA:
+URL webhooka discord - do powiadamiania użytkownika:
 - `DISCORDURL` - adres url webhook'a discord
 
-URL WEBHOOKA MACRODROID - JEST TO APLIKACJA DO AUTOMATYZACJI NA ANDROIDA (PRZYKŁADOWE MAKRA W FOLDERZE MACRODROID W REPOZYTORIUM):
+URL webhooka macrodroid - jest to aplikacja do automatyzacji na androida (przykładowe makra w folderze macrodroid w repozytorium):
 - `MACRODROIDURL` - adres URL do wyzwalnia makra w macrodroid przy znalezieniu nowego najszybszego terminu
 - `MACRODROIDURLRESERV` - adres URL do wyzwalnia makra w macrodroid przy rezerwacji terminu
