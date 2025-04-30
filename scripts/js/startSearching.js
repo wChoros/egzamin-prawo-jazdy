@@ -1,6 +1,5 @@
 import fetch from "node-fetch";
 import getToken from './getToken.js';
-import getTokenReserv from './getTokenReserv.js';
 import { takeReservation } from './take-reservation.js';
 import { sleep } from './sleep.js';
 
@@ -45,21 +44,28 @@ export const startSearching = async () => {
 				console.log(" RESTART SCRIPT TO RESERV NEW");
 			}
             const response = await fetch(`https://info-car.pl/api/word/word-centers/exam-schedule`, {
-                method: "PUT",
-                body: JSON.stringify({
-                    category: "B",
+				credentials: "include",
+				headers: {
+					"User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:137.0) Gecko/20100101 Firefox/137.0",
+					Accept: "application/json, text/plain, */*",
+					"Accept-Language": "pl-PL",
+					Authorization: bearer_token,
+					"Content-Type": "application/json",
+					"Sec-Fetch-Dest": "empty",
+					"Sec-Fetch-Mode": "cors",
+					"Sec-Fetch-Site": "same-origin",
+					"Sec-GPC": "1",
+				},
+				referrer:
+					"https://info-car.pl/new/prawo-jazdy/zapisz-sie-na-egzamin-na-prawo-jazdy/wybor-terminu",
+				body: JSON.stringify({
+					category: "B",
 					endDate: process.env.DATE_TO,
 					startDate: process.env.DATE_FROM,
-					wordId: process.env.WORDID
-                }),
-                headers: {
-					"Accept": "*/*",
-					"Accept-Encoding": "deflate, gzip",
-					"Host": "info-car.pl",
-					"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-                    "Content-Type": "application/json",
-                    "Authorization": bearer_token
-                }
+					wordId: process.env.WORDID,
+				}),
+				method: "PUT",
+				mode: "cors",
             }).catch(err => { throw new Error(err); });
             if (response.status !== 200) {
                 retryCount++;
@@ -77,7 +83,18 @@ export const startSearching = async () => {
                 continue;
             } else retryCount = 0;
 			const { schedule } = await response.json();
-			
+			// Print available hours for each scheduled day
+			console.log("+------AVAILABLE HOURS---------+");
+			schedule.scheduledDays.forEach(day => {
+				if (day.scheduledHours.some(hour => hour.practiceExams.length !== 0)) {
+				console.log(`| Date: ${day.day}              |`);
+				day.scheduledHours.forEach(hour => {
+					if (hour.practiceExams.length !== 0) {
+						console.log(`| Time: ${hour.time} - Places: ${hour.practiceExams[0].places} |`);
+					}
+				});
+				console.log("+------------------------------+");}
+			});
             //DATA FILTRATION
 			const DATE_FROM = process.env.DATE_FROM;
             const DATE_TO = process.env.DATE_TO;	
@@ -214,7 +231,7 @@ export const startSearching = async () => {
 							console.log("Retrieving reservation authorization token...")
 							let bearer_token_reserv = ""
 							do {
-								bearer_token_reserv = await getTokenReserv()
+								bearer_token_reserv = await getToken(true)
 								console.log(bearer_token_reserv);
 							} while(bearer_token_reserv == "")
 								
