@@ -19,7 +19,7 @@ export const startSearching = async () => {
 	let firstTime = 0;
 	let firstPlaces = 0;
 	let firstID = 0;	
-	let fetchRate = 30; //delay between schedule download in s
+	let fetchRate = 10; //delay between schedule download in s
 	let reservationMade = 0;
 	let slowMode = 0;
 	let firstRun = 1;
@@ -30,14 +30,14 @@ export const startSearching = async () => {
 				if(slowMode==0){
 					await sleep(fetchRate * 1000);	
 				} else{
-					await sleep(2 * fetchRate * 1000);	
+					await sleep(2.5 * fetchRate * 1000);	
 					slowMode--;
 					console.log(` Slowmode active for next ${slowMode} runs`);
 				}
 			}
 			firstRun=0;
 			//GATHERING DATA
-			console.log("==============INFO==============");
+			console.log(`==============INFO==============\n${new Date().toISOString()}`);
 			console.log(" Updating schedule data...");
 			if(reservationMade==1){
 				console.log(" RESERVATION ALREADY MADE!");
@@ -305,8 +305,8 @@ export const startSearching = async () => {
         } catch (err) {
 			//ERROR HANDLING
 			console.log(err);
-			console.log("Enabling Slow Mode because of Error for next 5 runs...");
-			slowMode = 5;
+			console.log("Enabling Slow Mode because of Error for next 1 run...");
+			slowMode = 1;
 			}
     }
 };
