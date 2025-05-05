@@ -48,7 +48,7 @@ def main():
     for request in driver.requests:
         if request.url == search_url:
             print(request.headers.get('Authorization', 'No Authorization header found'))
-            with open("/home/twoface/Desktop/priv/egzamin-prawo-jazdy-clone/reservationToken.txt", 'w+') as file:
+            with open(f"{os.getenv("APP_PATH")}/reservationToken.txt", 'w+') as file:
                 file.write(request.headers.get('Authorization', 'No Authorization header found'))
     # driver.quit()
 

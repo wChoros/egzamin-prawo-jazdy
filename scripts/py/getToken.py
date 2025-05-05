@@ -9,11 +9,10 @@ from seleniumwire import webdriver  # using selenium-wire for request intercepti
 
 load_dotenv()
 
-def login(driver, use_reserv_credentials):
-    email = os.getenv("EMAIL_RESERV") if use_reserv_credentials else os.getenv("EMAIL")
-    password = os.getenv("PASSWORD_RESERV") if use_reserv_credentials else os.getenv("PASSWORD")
+def login(driver, search_email):
+    password = os.getenv("PASSWORD")
 
-    driver.find_element(By.ID, "username").send_keys(email)
+    driver.find_element(By.ID, "username").send_keys(search_email)
     driver.find_element(By.ID, "password").send_keys(password)
     driver.find_element(By.ID, "register-button").click()
 
@@ -41,10 +40,16 @@ def main():
     service = ChromeService(executable_path=chromedriver_path)
     driver = webdriver.Chrome(service=service, options=options)
 
-    use_reserv_credentials = "-r" in sys.argv
+    search_email = None
+    if "-e" in sys.argv:
+        try:
+            search_email = sys.argv[sys.argv.index("-e") + 1]
+        except IndexError:
+            print("Error: No email provided after -e flag")
+            sys.exit(1)
 
     driver.get(url)
-    login(driver, use_reserv_credentials)
+    login(driver, search_email)
 
     search_url = "https://info-car.pl/oauth2/userinfo"
     for request in driver.requests:
